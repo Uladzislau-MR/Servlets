@@ -1,5 +1,8 @@
 package com.vladislav.homework.task_1;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 /**
  * A doubly linked list implementation of the CustomList interface.
  *
@@ -190,6 +193,8 @@ public class CustomLinkedList<E> implements CustomList<E> {
         return false;
     }
 
+
+
     /**
      * Returns {@code true} if this list contains no elements.
      *
@@ -254,4 +259,105 @@ public class CustomLinkedList<E> implements CustomList<E> {
         }
         return current;
     }
+
+    @Override
+    public void sort() {
+        /**
+         * Sorts the elements of this linked list according to their natural order.
+         * If the elements are null, they are considered greater than non-null elements.
+         */
+        Comparator<E> comparator = new Comparator<E>() {
+            @Override
+            public int compare(E o1, E o2) {
+                if (o1 == null && o2 == null) return 0;
+                if (o1 == null) return 1;
+                if (o2 == null) return -1;
+                return ((Comparable<E>) o1).compareTo(o2);
+            }
+        };
+
+        // Sort the list using the natural order of elements
+        head = mergeSort(head, comparator);
+
+        // Update the tail reference after sorting
+        Node<E> current = head;
+        while (current.next != null) {
+            current = current.next;
+        }
+        tail = current;
+    }
+
+    /**
+     * Recursively sorts a linked list using merge sort.
+     *
+     * @param head       the head of the linked list to sort
+     * @param comparator the comparator to use for comparing elements
+     * @return the sorted linked list
+     */
+    private Node<E> mergeSort(Node<E> head, Comparator<E> comparator) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        // Split the list into halves
+        Node<E> middle = getMiddle(head);
+        Node<E> nextOfMiddle = middle.next;
+        middle.next = null;
+
+        // Recursively sort the two halves
+        Node<E> left = mergeSort(head, comparator);
+        Node<E> right = mergeSort(nextOfMiddle, comparator);
+
+        // Merge the sorted halves
+        return sortedMerge(left, right, comparator);
+    }
+
+    /**
+     * Merges two sorted linked lists into a single sorted list.
+     *
+     * @param a          the first sorted linked list
+     * @param b          the second sorted linked list
+     * @param comparator the comparator to use for comparing elements
+     * @return the merged sorted linked list
+     */
+    private Node<E> sortedMerge(Node<E> a, Node<E> b, Comparator<E> comparator) {
+        if (a == null) return b;
+        if (b == null) return a;
+
+        Node<E> result;
+        if (comparator.compare(a.data, b.data) <= 0) {
+            result = a;
+            result.next = sortedMerge(a.next, b, comparator);
+            result.next.prev = result;
+            result.prev = null;
+        } else {
+            result = b;
+            result.next = sortedMerge(a, b.next, comparator);
+            result.next.prev = result;
+            result.prev = null;
+        }
+        return result;
+    }
+
+    /**
+     * Finds the middle of the linked list.
+     *
+     * @param head the head of the linked list
+     * @return the middle node of the linked list
+     */
+    private Node<E> getMiddle(Node<E> head) {
+        if (head == null) {
+            return head;
+        }
+        Node<E> slow = head, fast = head;
+        while (fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
+    }
+
+
+
+
 }
