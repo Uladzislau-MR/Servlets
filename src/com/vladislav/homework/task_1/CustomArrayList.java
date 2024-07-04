@@ -193,7 +193,7 @@ public class CustomArrayList<E> implements CustomList<E> {
      */
     @Override
     public void sort() {
-        // Используем естественный порядок элементов, если элементы реализуют Comparable
+
         Comparator<E> comparator = new Comparator<E>() {
             @Override
             public int compare(E o1, E o2) {
@@ -204,7 +204,7 @@ public class CustomArrayList<E> implements CustomList<E> {
             }
         };
 
-        // Используем Arrays.sort для сортировки с созданным компаратором
+
         Arrays.sort((E[]) elements, 0, elementIndex, comparator);
     }
 

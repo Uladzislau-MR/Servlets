@@ -276,7 +276,7 @@ public class CustomLinkedList<E> implements CustomList<E> {
             }
         };
 
-        // Sort the list using the natural order of elements
+
         head = mergeSort(head, comparator);
 
         // Update the tail reference after sorting
@@ -299,16 +299,16 @@ public class CustomLinkedList<E> implements CustomList<E> {
             return head;
         }
 
-        // Split the list into halves
+
         Node<E> middle = getMiddle(head);
         Node<E> nextOfMiddle = middle.next;
         middle.next = null;
 
-        // Recursively sort the two halves
+
         Node<E> left = mergeSort(head, comparator);
         Node<E> right = mergeSort(nextOfMiddle, comparator);
 
-        // Merge the sorted halves
+
         return sortedMerge(left, right, comparator);
     }
 
