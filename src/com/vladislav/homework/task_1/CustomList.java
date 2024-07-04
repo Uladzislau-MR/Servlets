@@ -87,4 +87,5 @@ interface CustomList<E> {
      * @return {@code true} if this list contains the specified element
      */
     boolean contains(E element);
+    void sort();
 }

@@ -1,5 +1,8 @@
 package com.vladislav.homework.task_1;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 /**
  * A custom implementation of an ArrayList.
  *
@@ -174,4 +177,33 @@ public class CustomArrayList<E> implements CustomList<E> {
         }
         return false;
     }
+    /**
+     * Sorts the elements in this list according to their natural order.
+     * The natural order is determined by the {@link Comparable} interface implemented by the elements.
+     * If an element is null, it is considered greater than any non-null element.
+     *
+     * <p>
+     * This method sorts the elements using the QuickSort algorithm as implemented by {@link Arrays#sort(Object[], int, int, Comparator)}.
+     * </p>
+     *
+     * @throws ClassCastException if any element in this list does not implement {@link Comparable}
+     */
+    @Override
+    public void sort() {
+
+        Comparator<E> comparator = new Comparator<E>() {
+            @Override
+            public int compare(E o1, E o2) {
+                if (o1 == null && o2 == null) return 0;
+                if (o1 == null) return 1;
+                if (o2 == null) return -1;
+                return ((Comparable<E>) o1).compareTo(o2);
+            }
+        };
+
+
+        Arrays.sort((E[]) elements, 0, elementIndex, comparator);
+    }
+
 }
+
