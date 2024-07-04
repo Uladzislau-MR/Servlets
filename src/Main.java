@@ -30,11 +30,11 @@ public class Main {
             System.out.println(array2.get(i));
         }
 
-//        array.remove(1);
-//        for (int i = 0; i < array.size(); i++) {
-//            System.out.println(array2.get(i));
-//
-//        }
+        array.remove(1);
+        for (int i = 0; i < array.size(); i++) {
+            System.out.println(array2.get(i));
+
+        }
 
 
 

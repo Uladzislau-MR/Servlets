@@ -1,5 +1,7 @@
 package com.vladislav.homework.task_1;
 
+import java.util.Comparator;
+
 /**
  * A custom list interface that defines basic operations for a list data structure.
  *
@@ -87,5 +89,7 @@ interface CustomList<E> {
      * @return {@code true} if this list contains the specified element
      */
     boolean contains(E element);
+
     void sort();
+
 }

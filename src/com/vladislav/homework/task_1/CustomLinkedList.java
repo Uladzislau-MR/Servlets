@@ -1,5 +1,6 @@
 package com.vladislav.homework.task_1;
 
+import java.util.Arrays;
 import java.util.Comparator;
 
 /**
@@ -192,6 +193,8 @@ public class CustomLinkedList<E> implements CustomList<E> {
         return false;
     }
 
+
+
     /**
      * Returns {@code true} if this list contains no elements.
      *
@@ -256,6 +259,7 @@ public class CustomLinkedList<E> implements CustomList<E> {
         }
         return current;
     }
+
     @Override
     public void sort() {
         /**
@@ -352,7 +356,6 @@ public class CustomLinkedList<E> implements CustomList<E> {
         }
         return slow;
     }
-
 
 
 
